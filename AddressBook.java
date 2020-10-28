@@ -170,8 +170,7 @@ class ContactPerson {
 	
 	static Scanner scan = new Scanner(System.in);
 	
-	
-	
+
 	public static String personDetails()
 	{
 		
