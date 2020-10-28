@@ -13,7 +13,7 @@ public class AddressBook extends ContactPerson
 		
 		int choice,noOfContacts,mailPosition=7,PhNoPosition=6,one=1,two=2;
 		String details = null;
-		final int editContact=2, exit=3;
+		final int editContact=2, exit=4,deleteContact=3;
 		
 		Scanner scan = new Scanner(System.in);
 		
@@ -43,7 +43,7 @@ public class AddressBook extends ContactPerson
 					{
 						addressBook.add(details);
 
-						System.out.print("\n\nContact Added Successfully\n\n\n1.Create Another Contact\n\t2.Edit Contact\n\t2.Exit\n\nChoice : ");
+						System.out.print("\n\nContact Added Successfully\n\n\n\t1.Create Another Contact\n\t2.Edit Contact\n\t3.Delete Contact\n\t4.Exit\n\nChoice : ");
 						choice=scan.nextInt();
 					
 						switch (choice)
@@ -51,6 +51,16 @@ public class AddressBook extends ContactPerson
 						case editContact:
 							editDetails();
 							System.out.println("Edited Successfully");
+							break;
+						case deleteContact://Case to delete contact
+							for(String address2 : addressBook)
+							{
+								String[] contact = address2.split("  ");
+								
+								System.out.println(contact[0]+","+contact[1]+","+contact[6]+","+contact[7]);
+							}
+							deleteContact();//Delete method calling
+							System.out.println("Deleted Successfully");
 							break;
 						case exit:
 							break;
@@ -65,13 +75,13 @@ public class AddressBook extends ContactPerson
 			{
 				addressBook.add(details);
 	
-				System.out.print("\nContact Added Successfully\n\n\n1.Create Another Contact\n\n\t2.Edit contact\n\t3.Exit\n\nchoice : ");
+				System.out.print("\nContact Added Successfully\n\n\t1.Create Another Contact\n\t2.Edit contact\n\t3.Delete Contact\n\t4.Exit\n\nchoice : ");
 				
 				choice=scan.nextInt();
 				switch (choice)
+				
 				{
 				case editContact:
-					
 					for(String address : addressBook)
 					{
 						String[] contact = address.split("  ");
@@ -81,6 +91,18 @@ public class AddressBook extends ContactPerson
 					editDetails();
 					System.out.println("Edited Successfully");
 					break;
+					
+				case deleteContact:
+					for(String address : addressBook)
+					{
+						String[] contact = address.split("  ");
+						
+						System.out.println(contact[0]+","+contact[1]+","+contact[6]+","+contact[7]);
+					}
+					deleteContact();
+					System.out.println("Deleted Successfully");
+					break;
+					
 				case exit:
 					break;
 				}
@@ -88,6 +110,23 @@ public class AddressBook extends ContactPerson
 		}
 	}
 	
+private static void deleteContact() {
+	
+	System.out.print("Enter Mobile Number OR Email : ");
+	String deleteWith=scan.next();
+	
+	int i=0;
+	for(String address : addressBook)
+	{
+		if(address.contains(deleteWith))
+		{
+			
+			addressBook.remove(i);//Deletes The contact
+		}
+		i++;
+	}
+	}
+
 private static void editDetails() {
 		
 		System.out.print("Enter Mobile Number OR Email : ");
@@ -97,9 +136,9 @@ private static void editDetails() {
 		{
 			if(address.contains(editWith))
 			{
-				editedDetails=personDetails();//it gets updated address
+				editedDetails=personDetails();//it gets updated contact
 				
-				addressBook.set(i, editedDetails);//replaces the updated address
+				addressBook.set(i, editedDetails);//replaces the updated contact
 			}
 			i++;
 		}		
@@ -148,3 +187,4 @@ class ContactPerson {
 		return personDetails;
 	}
 }
+
