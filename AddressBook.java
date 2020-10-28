@@ -71,6 +71,7 @@ public class AddressBook extends ContactPerson
 				switch (choice)
 				{
 				case editContact:
+					
 					for(String address : addressBook)
 					{
 						String[] contact = address.split("  ");
